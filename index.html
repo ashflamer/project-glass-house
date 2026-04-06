@@ -5,46 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PROJECT: GLASS HOUSE</title>
     <style>
-        /* Prevents mobile bouncing and zooming */
         * { touch-action: none; user-select: none; -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
-        body { margin: 0; background: #000; color: #fff; font-family: 'Courier New', monospace; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center; }
+        body { margin: 0; background: #0a0a0a; color: #fff; font-family: 'Courier New', monospace; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center; }
         
-        #canvas-container { position: relative; width: 100vw; height: 100vh; max-width: 800px; max-height: 600px; cursor: crosshair; background: #000; }
-        canvas { width: 100%; height: 100%; background: #000; image-rendering: pixelated; display: block; }
+        #canvas-container { position: relative; width: 100vw; height: 100vh; max-width: 800px; max-height: 600px; background: #000; box-shadow: 0 0 50px rgba(255,255,255,0.05); }
+        canvas { width: 100%; height: 100%; background: #111; image-rendering: pixelated; display: block; }
         
-        /* CRT Scanline and Color Distortion Effect */
         .crt-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
-            background-size: 100% 2px, 3px 100%; pointer-events: none; z-index: 10;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+            background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 10; opacity: 0.8;
         }
 
-        #ui-layer { position: absolute; top: 15px; left: 15px; z-index: 20; font-size: 14px; pointer-events: none; text-shadow: 2px 2px #000; opacity: 0.9; }
+        #ui-layer { position: absolute; top: 20px; left: 20px; z-index: 20; font-size: 13px; pointer-events: none; text-shadow: 2px 2px #000; letter-spacing: 1px; }
+        #dialogue-box { position: absolute; bottom: 30px; width: 90%; left: 5%; background: rgba(0,0,0,0.8); border: 1px solid #333; padding: 15px; z-index: 30; display: none; font-size: 14px; color: #eee; }
         
-        /* Start Screen */
         #overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #080808;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; text-align: center; padding: 20px;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; text-align: center;
         }
-        h1 { font-size: 24px; letter-spacing: 4px; margin-bottom: 15px; }
-        button { background: none; border: 1px solid #fff; color: #fff; padding: 15px 30px; font-family: inherit; cursor: pointer; transition: 0.3s; font-size: 16px; }
-        button:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
+        button { background: none; border: 1px solid #444; color: #888; padding: 15px 40px; font-family: inherit; cursor: pointer; transition: 0.5s; }
+        button:hover { border-color: #fff; color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
     <div id="overlay">
-        <h1>PROJECT: GLASS HOUSE</h1>
-        <p style="opacity: 0.5; margin-bottom: 30px;">[30-DAY ISOLATION PROTOCOL]</p>
-        <button id="startBtn">INITIALIZE SYSTEM</button>
+        <h1 style="letter-spacing: 10px;">GLASS HOUSE</h1>
+        <p style="opacity: 0.4; margin-bottom: 40px;">SUBJECT_ID: VESPER</p>
+        <button id="startBtn">SYNC CONSCIOUSNESS</button>
     </div>
 
     <div id="canvas-container">
         <div id="ui-layer">
-            <div id="day-counter">DAY: 1</div>
-            <div id="stability-meter">STABILITY: 100%</div>
-            <div id="objective" style="margin-top: 10px; color: #888;">STATUS: MONITORING...</div>
+            <div id="day-txt">DAY: 01</div>
+            <div id="stab-txt">STABILITY: 100%</div>
         </div>
+        <div id="dialogue-box"></div>
         <div class="crt-overlay"></div>
         <canvas id="gameCanvas" width="800" height="600"></canvas>
     </div>
