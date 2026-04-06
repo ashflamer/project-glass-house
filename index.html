@@ -3,68 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GARDEN OF GUILT</title>
+    <title>GARDEN OF GUILT: THE ROOMS</title>
     <style>
-        * { touch-action: none; user-select: none; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; background: #000; color: #333; font-family: 'Georgia', serif; overflow: hidden; height: 100vh; }
-        
+        * { touch-action: none; user-select: none; box-sizing: border-box; }
+        body { margin: 0; background: #000; color: #333; font-family: 'Georgia', serif; overflow: hidden; }
         #canvas-container { position: relative; width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; }
-        canvas { background: #fff; image-rendering: pixelated; width: 100%; height: 100%; max-width: 800px; max-height: 600px; border: 10px solid #eee; cursor: crosshair; }
+        canvas { background: #fff; width: 100%; height: 100%; max-width: 800px; max-height: 600px; image-rendering: pixelated; }
         
-        /* UI Elements */
-        #ui { position: absolute; top: 30px; left: 30px; z-index: 10; pointer-events: none; width: 200px; }
-        .stat { margin-bottom: 10px; font-size: 12px; letter-spacing: 2px; color: #888; text-transform: uppercase; }
-        #decay-bar { width: 100%; height: 6px; background: #eee; border: 1px solid #ddd; margin-top: 5px; }
-        #decay-fill { width: 0%; height: 100%; background: #00ffcc; transition: 0.5s ease-out; box-shadow: 0 0 10px rgba(0,255,200,0.5); }
+        #vignette { position: absolute; inset: 0; pointer-events: none; z-index: 5; background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.7) 100%); }
+        
+        #ui { position: absolute; top: 20px; left: 20px; z-index: 10; color: #888; font-size: 12px; letter-spacing: 2px; }
+        #decay-bar { width: 100px; height: 4px; background: #333; margin-top: 5px; }
+        #decay-fill { width: 0%; height: 100%; background: #00ffcc; transition: 0.5s; }
 
-        /* Dialogue Box */
         #dialogue-wrap { 
-            position: absolute; bottom: 40px; width: 85%; left: 7.5%; 
-            background: rgba(255, 255, 255, 0.95); border: 2px solid #333; 
-            padding: 25px; display: none; z-index: 50; box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+            position: absolute; bottom: 30px; width: 90%; left: 5%; 
+            background: #fff; border: 2px solid #000; padding: 20px; 
+            display: none; z-index: 50; 
         }
-        #text-content { font-size: 16px; line-height: 1.6; color: #222; margin-bottom: 20px; min-height: 50px; }
-        .options { display: flex; flex-wrap: wrap; gap: 10px; }
-        .opt-btn { 
-            background: #222; color: #fff; border: none; padding: 10px 20px; 
-            cursor: pointer; font-family: 'Courier New', monospace; font-size: 12px; transition: 0.2s;
-        }
-        .opt-btn:hover { background: #00ffcc; color: #000; }
+        #input-area { display: none; margin-top: 10px; }
+        #pass-input { border: 1px solid #000; padding: 5px; font-family: monospace; width: 100px; text-align: center; }
+        .opt-btn { background: #000; color: #fff; border: none; padding: 8px 15px; cursor: pointer; margin-right: 10px; font-size: 11px; }
 
-        /* Start Screen */
-        #overlay { 
-            position: absolute; inset: 0; background: #fff; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            z-index: 100; text-align: center; 
-        }
-        h1 { font-weight: normal; letter-spacing: 12px; margin-bottom: 10px; color: #222; }
-        #startBtn { 
-            margin-top: 50px; padding: 15px 40px; border: 1px solid #ccc; 
-            background: none; cursor: pointer; font-family: inherit; letter-spacing: 3px; color: #999;
-            transition: 0.5s;
-        }
-        #startBtn:hover { border-color: #222; color: #222; }
+        #overlay { position: absolute; inset: 0; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; }
+        #startBtn { border: 1px solid #000; background: none; padding: 10px 30px; cursor: pointer; letter-spacing: 5px; }
     </style>
 </head>
 <body>
-    <div id="overlay">
-        <h1>GARDEN OF GUILT</h1>
-        <p style="font-style: italic; color: #aaa;">"Everything is beautiful here. Why look back?"</p>
-        <button id="startBtn">SYNC CONSCIOUSNESS</button>
-    </div>
-
+    <div id="overlay"><h1>GARDEN</h1><button id="startBtn">SYNC</button></div>
     <div id="canvas-container">
+        <div id="vignette"></div>
         <div id="ui">
-            <div class="stat">MEMORIES: <span id="mem-count">0</span>/3</div>
-            <div class="stat">HUMANITY DECAY</div>
+            <div id="room-name">MAIN HALL</div>
             <div id="decay-bar"><div id="decay-fill"></div></div>
         </div>
-        
         <div id="dialogue-wrap">
             <div id="text-content"></div>
-            <div id="opt-container" class="options"></div>
+            <div id="input-area">
+                <input type="text" id="pass-input" maxlength="4" placeholder="0000">
+                <button class="opt-btn" id="submit-pass">ENTER</button>
+            </div>
+            <div id="opt-container"></div>
         </div>
-
         <canvas id="gameCanvas" width="800" height="600"></canvas>
     </div>
     <script src="game.js"></script>
