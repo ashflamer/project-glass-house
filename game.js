@@ -549,12 +549,14 @@ function draw() {
         ctx.restore();
     }
 
+    // Shadow
     ctx.fillStyle = 'rgba(0,0,0,0.12)';
     ctx.beginPath();
     ctx.ellipse(game.player.x, game.player.y + 25, 15, 6, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    if (spriteSheet.complete) {
+    // Player sprite (with fallback if image missing)
+    if (spriteSheet.complete && spriteSheet.naturalWidth > 0) {
         ctx.drawImage(
             spriteSheet,
             game.player.currentCol * FRAME_SIZE,
@@ -566,13 +568,29 @@ function draw() {
             64,
             64
         );
+    } else {
+        // fallback visible character
+        ctx.fillStyle = '#111';
+        ctx.beginPath();
+        ctx.arc(game.player.x, game.player.y - 8, 12, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillRect(game.player.x - 8, game.player.y + 4, 16, 22);
     }
 
     requestAnimationFrame(draw);
 }
 
+function mapKey(k) {
+    const key = k.toLowerCase();
+    if (key === 'arrowup') return 'w';
+    if (key === 'arrowleft') return 'a';
+    if (key === 'arrowdown') return 's';
+    if (key === 'arrowright') return 'd';
+    return key;
+}
+
 window.addEventListener('keydown', (e) => {
-    const k = e.key.toLowerCase();
+    const k = mapKey(e.key);
     if (k in game.keys) {
         e.preventDefault();
         game.keys[k] = true;
@@ -580,7 +598,7 @@ window.addEventListener('keydown', (e) => {
 });
 
 window.addEventListener('keyup', (e) => {
-    const k = e.key.toLowerCase();
+    const k = mapKey(e.key);
     if (k in game.keys) game.keys[k] = false;
 });
 
