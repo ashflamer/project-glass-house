@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GARDEN OF GUILT</title>
+    <title>GARDEN OF GUILT: DREAM ROUTE</title>
     <style>
         * { touch-action: none; user-select: none; box-sizing: border-box; }
         body { margin: 0; background: #000; color: #333; font-family: 'Georgia', serif; overflow: hidden; }
@@ -14,10 +14,10 @@
         #decay-bar { width: 140px; height: 5px; background: #222; margin-top: 5px; border: 1px solid #444; }
         #decay-fill { width: 0%; height: 100%; background: #00ffcc; transition: 0.8s; box-shadow: 0 0 10px #00ffcc; }
         #dialogue-wrap { position: absolute; bottom: 40px; width: 80%; left: 10%; background: #fff; border: 3px solid #000; padding: 25px; display: none; z-index: 50; box-shadow: 10px 10px 0px rgba(0,0,0,0.15); }
-        #text-content { font-size: 18px; line-height: 1.4; color: #111; margin-bottom: 20px; }
+        #text-content { font-size: 18px; line-height: 1.4; color: #111; margin-bottom: 20px; white-space: pre-line; }
         #input-area { display: none; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
         #pass-input { border: 2px solid #000; padding: 8px; font-family: monospace; width: 100px; text-align: center; font-size: 20px; letter-spacing: 4px; }
-        .opt-btn { background: #000; color: #fff; border: none; padding: 12px 24px; cursor: pointer; margin-right: 10px; font-size: 12px; transition: 0.2s; }
+        .opt-btn { background: #000; color: #fff; border: none; padding: 12px 24px; cursor: pointer; margin-right: 10px; margin-top: 8px; font-size: 12px; transition: 0.2s; }
         .opt-btn:hover { background: #00ffcc; color: #000; }
         #overlay { position: absolute; inset: 0; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; }
         #startBtn { border: 2px solid #000; background: none; padding: 18px 45px; cursor: pointer; letter-spacing: 6px; color: #000; font-weight: bold; }
@@ -25,15 +25,15 @@
 </head>
 <body>
     <div id="overlay">
-        <h1 style="font-weight: normal; letter-spacing: 15px; margin-bottom: 40px;">GARDEN OF GUILT</h1>
-        <button id="startBtn">SYNC CONSCIOUSNESS</button>
+        <h1 style="font-weight: normal; letter-spacing: 15px; margin-bottom: 40px;">GARDEN OF GUILT: DREAM ROUTE</h1>
+        <button id="startBtn">OPEN EYES</button>
     </div>
     <div id="canvas-container">
         <div id="vignette"></div>
         <div id="ui">
             <div id="room-name">MAIN HALL</div>
             <div id="decay-bar"><div id="decay-fill"></div></div>
-            <div style="margin-top:10px">MEMORIES: <span id="mem-count">0</span>/3</div>
+            <div style="margin-top:10px">MEMORIES: <span id="mem-count">0/4</span></div>
         </div>
         <div id="dialogue-wrap">
             <div id="text-content"></div>
