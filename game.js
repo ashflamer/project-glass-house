@@ -12,7 +12,7 @@ spriteSheet.src = 'pic movement.jpg';
 
 const CHARACTER_OFFSET_X = 6 * 32; 
 const CHARACTER_OFFSET_Y = 4 * 32; 
-const ROWS = { DOWN: 64, LEFT: 96, RIGHT: 0, UP: 32 };
+const ROWS = { DOWN: 32, LEFT: 64, RIGHT: 96, UP: 0 };
 
 let game = {
     currentRoom: "HALL",
