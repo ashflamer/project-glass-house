@@ -11,7 +11,7 @@ const spriteSheet = new Image();
 spriteSheet.src = 'pic movement.jpg'; 
 
 const CHARACTER_OFFSET_X = 6 * 32; 
-const CHARACTER_OFFSET_Y = 6 * 32; 
+const CHARACTER_OFFSET_Y = 4 * 32; 
 const ROWS = { DOWN: 64, LEFT: 96, RIGHT: 0, UP: 32 };
 
 let game = {
@@ -194,3 +194,13 @@ function returnToHall() {
 window.addEventListener('keydown', (e) => { if(e.key.toLowerCase() in game.keys) game.keys[e.key.toLowerCase()] = true; });
 window.addEventListener('keyup', (e) => { if(e.key.toLowerCase() in game.keys) game.keys[e.key.toLowerCase()] = false; });
 startBtn.onclick = () => { document.getElementById('overlay').style.display='none'; game.initialized=true; draw(); };
+
+
+// TEMPORARY ALIGNMENT TOOL - REMOVE AFTER FINDING COORDINATES
+window.addEventListener('keydown', (e) => {
+    if(e.key === "ArrowRight") CHARACTER_OFFSET_X += 1;
+    if(e.key === "ArrowLeft") CHARACTER_OFFSET_X -= 1;
+    if(e.key === "ArrowUp") CHARACTER_OFFSET_Y -= 1;
+    if(e.key === "ArrowDown") CHARACTER_OFFSET_Y += 1;
+    console.log(`X: ${CHARACTER_OFFSET_X}, Y: ${CHARACTER_OFFSET_Y}`);
+});
